@@ -34,21 +34,21 @@ saveBtn.on("click", function () {
 });
 
 
-function yesterdayTodayFuture() {
+function yesterdayTodayTomorrow() {
     hour = time.hours();
     $(".time-block").each(function () {
         var thisHour = parseInt($(this).attr("id"));
 
         if (thisHour > hour) {
-            $(this).addClass("future")
+            $(this).addClass("tomorrow")
         }
         else if (thisHour === hour) {
-            $(this).addClass("present");
+            $(this).addClass("today");
         }
         else {
-            $(this).addClass("past");
+            $(this).addClass("yesterday");
         }
     })
 }
 
-pastPresentFuture();
+yesterdayTodayTomorrow();
