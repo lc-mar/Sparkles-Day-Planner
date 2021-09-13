@@ -1,54 +1,37 @@
-var hour9 = $("#9");
-var hour10 = $("#10");
-var hour11 = $("#11");
-var hour12 = $("#12");
-var hour1 = $("#13");
-var hour2 = $("#14");
-var hour3 = $("#15");
-var hour4 = $("#16");
-var hour5 = $("#17");
-var time = moment();
+$ init
 
 function Planner() {
 
     $("#currentDay").text(moment().format("dddd, MMMM Do YYYY"));
+    colorTimeBlocks();
+    setInterval(colorTimeBlocks, 60000);
 
     $(".time-block").each(function () {
-        var id = $(this).attr("id");
-        var schedule = localStorage.getItem(id);
+        var blockid = $(this).attr("id");
+        $("#" + blockId + " textarea").text(localStorage.getItem(moment().format("DDDYYYY") + blockId));
 
         if (schedule !== null) {
             $(this).children(".schedule").val(schedule);
         }
     });
 }
-
-Planner();
 var saveBtn = $(".saveBtn");
-
-saveBtn.on("click", function () {
-    var time = $(this).parent().attr("id");
-    var schedule = $(this).siblings(".schedule").val();
-
-    localStorage.setItem(time, schedule);
-});
-
-
-function yesterdayTodayTomorrow() {
-    hour = time.hours();
-    $(".time-block").each(function () {
-        var thisHour = parseInt($(this).attr("id"));
-
-        if (thisHour > hour) {
-            $(this).addClass("tomorrow")
-        }
-        else if (thisHour === hour) {
-            $(this).addClass("today");
-        }
-        else {
-            $(this).addClass("yesterday");
-        }
-    })
-}
-
-yesterdayTodayTomorrow();
+function colorTimeBlocks() {
+    // for each time block
+    $(".time-block").each(function() {
+      var blockHour = parseInt($(this).attr("id").replace("hour-", ""));
+      var currentHour = parseInt(moment().format("H"));
+      $(this).removeClass("past present future");
+      if (blockHour < currentHour) {
+        $(this).addClass("past");
+      } else if (blockHour > currentHour) {
+        $(this).addClass("future");
+      } else {
+        $(this).addClass("present");
+      }
+    });
+  }
+  function handleSave(event) {
+    var hourId = $(this).parent().attr("id");
+    localStorage.setItem(moment().format("DDDYYYY") + hourId, $("#" + hourId + " textarea").val());
+  }
