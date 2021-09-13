@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/lc-mar/Sparkles-Day-Planner/issues"
   },
-  "homepage": "https://github.com/lc-mar/Sparkles-Day-Planner#readme"
+  "homepage": "https://github.com/lc-mar/Sparkles-Day-Planner#readme",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
 }
