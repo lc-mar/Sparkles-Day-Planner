@@ -1,7 +1,7 @@
 # Sparkles Day Planner
 
 ## Description
-
+This day planner will help you keep track of multiple tasks throughout your work day from 8am to 5pm. That way you will not schedule one meeting over the other and will have a good visual every day to see what is on your agenda!
 
 ## User Story
 
